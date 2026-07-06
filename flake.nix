@@ -38,21 +38,6 @@
         ./modules/terraria
         ./modules/undertale
         ./modules/until-then
-        ./modules/ghui
       ];
-
-      perSystem =
-        {
-          pkgs,
-          ...
-        }:
-        {
-          devShells.default = pkgs.mkShell {
-            packages = with pkgs; [
-              nixpkgs-fmt
-              npins
-            ];
-          };
-        };
     };
 }
