@@ -30,8 +30,8 @@ let
   jre = pkgs.jdk25;
 
   desktopItem = pkgs.makeDesktopItem {
-    name = "minecraft";
-    desktopName = "Minecraft";
+    name = "legacy-launcher";
+    desktopName = "Legacy Launcher";
     exec = "legacy-launcher";
     icon = "minecraft";
     terminal = false;
