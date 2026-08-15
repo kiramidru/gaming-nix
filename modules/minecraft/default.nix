@@ -65,6 +65,7 @@ let
 
       makeWrapper ${jre}/bin/java $out/bin/legacy-launcher \
         --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath deps}  \
+        --set _JAVA_AWT_WM_NONREPARENTING 1 \
         --add-flags "-jar $out/share/legacy-launcher/legacy-launcher.jar" \
         --add-flags "--java-executable ${jre}/bin/java"
 
