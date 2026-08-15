@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  pname = "llauncher";
+  pname = "legacy-launcher";
   version = "1.40.3";
 
   deps = with pkgs; [
@@ -32,7 +32,7 @@ let
   desktopItem = pkgs.makeDesktopItem {
     name = "minecraft";
     desktopName = "Minecraft";
-    exec = "llauncher";
+    exec = "legacy-launcher";
     icon = "minecraft";
     terminal = false;
     categories = [
@@ -40,7 +40,7 @@ let
     ];
   };
 
-  llauncher = pkgs.stdenv.mkDerivation {
+  legacy-launcher = pkgs.stdenv.mkDerivation {
     inherit pname version;
 
     src = pkgs.fetchurl {
@@ -49,6 +49,7 @@ let
     };
 
     nativeBuildInputs = with pkgs; [
+      copyDesktopItems
       makeWrapper
     ];
 
@@ -59,12 +60,12 @@ let
     installPhase = ''
       runHook preInstall
 
-      mkdir -p $out/share/llauncher $out/bin
-      cp $src $out/share/llauncher/llauncher.jar
+      mkdir -p $out/share/legacy-launcher $out/bin
+      cp $src $out/share/legacy-launcher/legacy-launcher.jar
 
-      makeWrapper ${jre}/bin/java $out/bin/llauncher \
+      makeWrapper ${jre}/bin/java $out/bin/legacy-launcher \
         --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath deps}  \
-        --add-flags "-jar $out/share/llauncher/llauncher.jar" \
+        --add-flags "-jar $out/share/legacy-launcher/legacy-launcher.jar" \
         --add-flags "--java-executable ${jre}/bin/java"
 
       runHook postInstall
@@ -73,12 +74,12 @@ let
     desktopItems = [ desktopItem ];
 
     meta = with pkgs.lib; {
-      description = "Minecraft launcher with offline and custom skin support (fork of SKlauncher)";
+      description = "Minecraft launcher with offline and custom skin support (formerly TL Legacy)";
       homepage = "https://llaun.ch/";
       license = licenses.gpl3Only;
       platforms = platforms.linux;
-      mainProgram = "llauncher";
+      mainProgram = "legacy-launcher";
     };
   };
 in
-llauncher
+legacy-launcher
