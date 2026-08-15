@@ -7,29 +7,20 @@
   };
 
   outputs =
-    inputs@{
-      flake-parts,
-      ...
-    }:
+    inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
       ];
 
-      imports = [
-        ./modules/balatro
-        ./modules/blender
-        ./modules/broforce
-        ./modules/celeste
-        ./modules/duck-detective
-        ./modules/hotline-miami
-        ./modules/hotline-miami-2
-        ./modules/jedi-academy
-        ./modules/shovel-knight
-        ./modules/stardew-valley
-        ./modules/terraria
-        ./modules/undertale
-        ./modules/until-then
-      ];
+      perSystem = { pkgs, ... }: {
+        packages = {
+          balatro = pkgs.callPackage ./modules/balatro { };
+          broforce = pkgs.callPackage ./modules/broforce { };
+          celeste = pkgs.callPackage ./modules/celeste { };
+          gris = pkgs.callPackage ./modules/gris { };
+          minecraft = pkgs.callPackage ./modules/minecraft { };
+        };
+      };
     };
 }
