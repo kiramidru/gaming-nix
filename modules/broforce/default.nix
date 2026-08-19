@@ -1,5 +1,4 @@
 { lib, pkgs, ... }:
-
 let
   pname = "broforce";
   version = "3148";
@@ -27,10 +26,10 @@ let
   ];
 
   desktopItem = pkgs.makeDesktopItem {
-    name = "broforce";
+    name = pname;
     desktopName = "Broforce";
-    exec = "broforce";
-    icon = "broforce";
+    exec = pname;
+    icon = pname;
     terminal = false;
     categories = [
       "Game"
@@ -76,14 +75,11 @@ let
 
     desktopItems = [ desktopItem ];
 
-    meta = {
-      description = "Private, fast, and honest web browser based on ungoogled-chromium";
-      homepage = "https://helium.computer/";
-      license = lib.licenses.gpl3Only;
-      platforms = [
-        "x86_64-linux"
-      ];
-      mainProgram = "broforce";
+    meta = with lib; {
+      description = "Side-scrolling run-and-gun platform video game";
+      homepage = "https://www.broforcegame.com/";
+      platforms = platforms.linux;
+      mainProgram = pname;
     };
   };
 in

@@ -9,10 +9,10 @@ let
   ];
 
   desktopItem = pkgs.makeDesktopItem {
-    name = "celeste";
+    name = pname;
     desktopName = "celeste";
-    exec = "celeste";
-    icon = "celeste";
+    exec = pname;
+    icon = pname;
     terminal = false;
     categories = [
       "Game"
@@ -53,14 +53,11 @@ let
 
     desktopItems = [ desktopItem ];
 
-    meta = {
-      description = "Private, fast, and honest web browser based on ungoogled-chromium";
-      homepage = "https://helium.computer/";
-      license = lib.licenses.gpl3Only;
-      platforms = [
-        "x86_64-linux"
-      ];
-      mainProgram = "celeste";
+    meta = with lib; {
+      description = "Narrative-driven, precision platformer about climbing a mountain";
+      homepage = "https://www.celestegame.com/";
+      platforms = platforms.linux;
+      mainProgram = pname;
     };
   };
 in

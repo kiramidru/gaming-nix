@@ -1,5 +1,4 @@
 { lib, pkgs, ... }:
-
 let
   pname = "gris";
   version = "1.03";
@@ -26,10 +25,10 @@ let
   ];
 
   desktopItem = pkgs.makeDesktopItem {
-    name = "gris";
+    name = pname;
     desktopName = "Gris";
-    exec = "gris";
-    icon = "gris";
+    exec = pname;
+    icon = pname;
     terminal = false;
     categories = [
       "Game"
@@ -74,14 +73,11 @@ let
 
     desktopItems = [ desktopItem ];
 
-    meta = {
-      description = "Private, fast, and honest web browser based on ungoogled-chromium";
-      homepage = "https://helium.computer/";
-      license = lib.licenses.gpl3Only;
-      platforms = [
-        "x86_64-linux"
-      ];
-      mainProgram = "gris";
+    meta = with lib; {
+      description = "Serene and evocative narrative platformer and puzzle game";
+      homepage = "https://nomada.studio/";
+      platforms = platforms.linux;
+      mainProgram = pname;
     };
   };
 in

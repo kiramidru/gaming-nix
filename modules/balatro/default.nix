@@ -14,10 +14,10 @@ let
   ];
 
   desktopItem = pkgs.makeDesktopItem {
-    name = "balatro";
+    name = pname;
     desktopName = "Balatro";
-    exec = "balatro";
-    icon = "balatro";
+    exec = pname;
+    icon = pname;
     terminal = false;
     categories = [
       "Game"
@@ -42,10 +42,10 @@ let
     buildInputs = deps;
 
     unpackCmd = ''
-      mkdir source
-      7z x $src -osource
 
-      ls -R .
+      ￼
+            mkdir source
+            7z x $src -osource
     '';
 
     installPhase = ''
@@ -64,12 +64,11 @@ let
 
     desktopItems = [ desktopItem ];
 
-    meta = {
-      description = "3D creation suite";
-      homepage = "https://www.blender.org/";
-      license = lib.licenses.gpl3Plus;
-      platforms = [ "x86_64-linux" ];
-      mainProgram = "blender";
+    meta = with lib; {
+      description = "A poker-inspired roguelike deck builder";
+      homepage = "https://www.playbalatro.com/";
+      platforms = platforms.linux;
+      mainProgram = pname;
     };
   };
 in

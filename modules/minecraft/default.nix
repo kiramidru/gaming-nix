@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 let
   pname = "legacy-launcher";
   version = "1.40.3";
@@ -30,9 +29,9 @@ let
   jre = pkgs.jdk25;
 
   desktopItem = pkgs.makeDesktopItem {
-    name = "legacy-launcher";
+    name = pname;
     desktopName = "Legacy Launcher";
-    exec = "legacy-launcher";
+    exec = pname;
     icon = "minecraft";
     terminal = false;
     categories = [
@@ -77,9 +76,8 @@ let
     meta = with pkgs.lib; {
       description = "Minecraft launcher with offline and custom skin support (formerly TL Legacy)";
       homepage = "https://llaun.ch/";
-      license = licenses.gpl3Only;
       platforms = platforms.linux;
-      mainProgram = "legacy-launcher";
+      mainProgram = pname;
     };
   };
 in

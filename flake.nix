@@ -18,8 +18,10 @@
           balatro = pkgs.callPackage ./modules/balatro { };
           broforce = pkgs.callPackage ./modules/broforce { };
           celeste = pkgs.callPackage ./modules/celeste { };
+          devil-daggers = pkgs.callPackage ./modules/devil-daggers { };
           gris = pkgs.callPackage ./modules/gris { };
           minecraft = pkgs.callPackage ./modules/minecraft { };
+          tmnt-shredders-revenge = pkgs.callPackage ./modules/tmnt-shredders-revenge { };
         };
       };
     };
