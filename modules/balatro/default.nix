@@ -41,11 +41,9 @@ let
 
     buildInputs = deps;
 
-    unpackCmd = ''
-
-      ￼
-            mkdir source
-            7z x $src -osource
+    unpackPhase = ''
+      mkdir source
+      7z x $src -osource
     '';
 
     installPhase = ''

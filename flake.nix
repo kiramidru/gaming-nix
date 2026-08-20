@@ -18,6 +18,7 @@
           balatro = pkgs.callPackage ./modules/balatro { };
           broforce = pkgs.callPackage ./modules/broforce { };
           celeste = pkgs.callPackage ./modules/celeste { };
+          crawl = pkgs.callPackage ./modules/crawl { };
           devil-daggers = pkgs.callPackage ./modules/devil-daggers { };
           gris = pkgs.callPackage ./modules/gris { };
           minecraft = pkgs.callPackage ./modules/minecraft { };
