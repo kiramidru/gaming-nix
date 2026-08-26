@@ -10,7 +10,7 @@ let
 
   desktopItem = pkgs.makeDesktopItem {
     name = pname;
-    desktopName = "celeste";
+    desktopName = "Celeste";
     exec = pname;
     icon = pname;
     terminal = false;

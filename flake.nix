@@ -20,8 +20,10 @@
           celeste = pkgs.callPackage ./modules/celeste { };
           crawl = pkgs.callPackage ./modules/crawl { };
           devil-daggers = pkgs.callPackage ./modules/devil-daggers { };
+          fury-unleashed = pkgs.callPackage ./modules/fury-unleashed { };
           gris = pkgs.callPackage ./modules/gris { };
           minecraft = pkgs.callPackage ./modules/minecraft { };
+          project-zomboid = pkgs.callPackage ./modules/project-zomboid { };
           tmnt-shredders-revenge = pkgs.callPackage ./modules/tmnt-shredders-revenge { };
         };
       };
