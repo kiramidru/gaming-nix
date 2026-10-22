@@ -25,7 +25,9 @@
             fury-unleashed = pkgs.callPackage ./modules/fury-unleashed { };
             gris = pkgs.callPackage ./modules/gris { };
             halo-ce = pkgs.callPackage ./modules/halo-ce { };
+            melee = pkgs.callPackage ./modules/melee { };
             minecraft = pkgs.callPackage ./modules/minecraft { };
+            project-aim = pkgs.callPackage ./modules/project-aim { };
             project-zomboid = pkgs.callPackage ./modules/project-zomboid { };
             tmnt-shredders-revenge = pkgs.callPackage ./modules/tmnt-shredders-revenge { };
           };

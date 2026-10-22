@@ -2,6 +2,7 @@
 let
   pname = "halo-ce";
   version = "v0.7.2e";
+  mapSrc = ./halo-xbox-maps.zip;
 
   deps = with pkgs; [
     sdl3
@@ -26,11 +27,9 @@ let
     inherit pname version;
 
     src = pkgs.fetchurl {
-      url = "https://github.com/ChupathingyCE/chupathingyce/releases/download/${version}/chupathingyce-linux-release.zip";
-      sha256 = "sha256-t66SPBJGy/VBydHCQsTBIr8Upiu9PqNXHemZ8KTXtZ4=";
+      url = "https://github.com/ChupathingyCE/chupathingyce/releases/download/${version}/chupathingyce-linux64-release.zip";
+      sha256 = "sha256-iji4aE/3UClntwjdQwTeUCcFMW/D0sVzre7U86zrWsQ=";
     };
-
-    mapSrc = ./halo-xbox-maps.zip;
 
     nativeBuildInputs = [
       pkgs.autoPatchelfHook
@@ -50,6 +49,7 @@ let
       cp -r * $out/opt/${pname}/
 
       ls -R $out/opt/${pname}
+      unzip -o ${mapSrc} -d $out/opt/${pname}
       chmod +x $out/opt/${pname}/halo
 
       makeWrapper $out/opt/${pname}/halo $out/bin/${pname} \
