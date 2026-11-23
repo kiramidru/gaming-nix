@@ -19,7 +19,7 @@ let
     udev
     zlib
     libpulseaudio
-    gtk2
+    gtk3
     glib
     gdk-pixbuf
     vulkan-loader

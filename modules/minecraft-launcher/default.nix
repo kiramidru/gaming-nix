@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  pname = "legacy-launcher";
+  pname = "minecraft-launcher";
   version = "1.40.3";
 
   deps = with pkgs; [
@@ -30,9 +30,9 @@ let
 
   desktopItem = pkgs.makeDesktopItem {
     name = pname;
-    desktopName = "Legacy Launcher";
+    desktopName = "Minecraft Launcher";
     exec = pname;
-    icon = "minecraft";
+    icon = "minecraft-launcher";
     terminal = false;
     categories = [
       "Game"
@@ -65,7 +65,7 @@ let
       makeWrapper ${jre}/bin/java $out/bin/legacy-launcher \
         --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath deps}  \
         --set _JAVA_AWT_WM_NONREPARENTING 1 \
-        --add-flags "-jar $out/share/legacy-launcher/legacy-launcher.jar" \
+        --add-flags "-jar $out/share/minecraft-launcher/minecraft-launcher.jar" \
         --add-flags "--java-executable ${jre}/bin/java"
 
       runHook postInstall
