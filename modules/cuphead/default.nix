@@ -8,7 +8,7 @@ let
     zlib
     gdk-pixbuf
     glib
-    gtk2
+    gtk3
 
     libglvnd
     libX11
