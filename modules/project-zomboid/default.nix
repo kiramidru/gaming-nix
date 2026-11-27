@@ -2,14 +2,19 @@
 let
   pname = "project-zomboid";
   version = "42.20.2";
+  installer = "project_zomboid_42_20_2_92872.sh";
 
   gameData = pkgs.stdenv.mkDerivation {
     pname = "${pname}-data";
     inherit version;
 
-    src = pkgs.fetchurl {
-      url = "https://archive.org/download/project-zomboid-linux-gog/project_zomboid_42_20_2_92872.sh";
+    src = pkgs.requireFile {
+      name = installer;
       sha256 = "sha256-4oMgL+oKIMeNNK2Uve1jR5J6HfMopxMjOZFxcXM6WNM=";
+      message = ''
+        Add the GOG Linux installer with:
+          nix-store --add-fixed sha256 ${installer}
+      '';
     };
 
     nativeBuildInputs = [ pkgs.unzip ];

@@ -65,6 +65,8 @@ let
       mkdir -p $out/opt/${pname} $out/bin
       cp -r source/Crawl/game/* $out/opt/${pname}
 
+      # Unity's optional screen selector is linked against GTK 2, not GTK 3.
+      rm -f "$out/opt/${pname}"/Crawl_Data/Plugins/{x86,x86_64}/ScreenSelector.so
       chmod +x $out/opt/${pname}/Crawl.x86_64
 
       makeWrapper $out/opt/${pname}/Crawl.x86_64 $out/bin/${pname} \

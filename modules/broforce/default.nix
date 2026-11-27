@@ -61,14 +61,9 @@ let
       mkdir -p $out/opt/${pname} $out/bin
       cp -r source/data/noarch/game/* $out/opt/${pname}
 
-      makeWrapper $out/opt/${pname}/Broforce.x86_64 $out/bin/${pname} \
-        --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath deps} \
-        --run '
-          USER_GAME_DIR=''${XDG_DATA_HOME:-''$HOME/.local/share}/${pname}
-          mkdir -p "$USER_GAME_DIR"
-          ln -sfn $out/opt/${pname}/* "$USER_GAME_DIR/"
-          cd "$USER_GAME_DIR"
-        '
+      makeWrapper "$out/opt/${pname}/Broforce.x86_64" "$out/bin/${pname}" \
+        --chdir "$out/opt/${pname}" \
+        --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath deps}
 
       runHook postInstall
     '';

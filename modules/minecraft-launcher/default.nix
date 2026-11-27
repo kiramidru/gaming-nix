@@ -27,11 +27,12 @@ let
   ];
 
   jre = pkgs.jdk25;
+  launcher = "legacy-launcher";
 
   desktopItem = pkgs.makeDesktopItem {
     name = pname;
     desktopName = "Minecraft Launcher";
-    exec = pname;
+    exec = launcher;
     icon = "minecraft-launcher";
     terminal = false;
     categories = [
@@ -59,13 +60,13 @@ let
     installPhase = ''
       runHook preInstall
 
-      mkdir -p $out/share/legacy-launcher $out/bin
-      cp $src $out/share/legacy-launcher/legacy-launcher.jar
+      launcherJar="$out/share/${launcher}/${launcher}.jar"
+      install -Dm644 "$src" "$launcherJar"
 
-      makeWrapper ${jre}/bin/java $out/bin/legacy-launcher \
-        --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath deps}  \
+      makeWrapper ${jre}/bin/java "$out/bin/${launcher}" \
+        --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath deps} \
         --set _JAVA_AWT_WM_NONREPARENTING 1 \
-        --add-flags "-jar $out/share/minecraft-launcher/minecraft-launcher.jar" \
+        --add-flags "-jar $launcherJar" \
         --add-flags "--java-executable ${jre}/bin/java"
 
       runHook postInstall
@@ -77,7 +78,7 @@ let
       description = "Minecraft launcher with offline and custom skin support (formerly TL Legacy)";
       homepage = "https://llaun.ch/";
       platforms = platforms.linux;
-      mainProgram = pname;
+      mainProgram = launcher;
     };
   };
 in

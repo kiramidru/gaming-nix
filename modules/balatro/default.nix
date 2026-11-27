@@ -42,16 +42,20 @@ let
     buildInputs = deps;
 
     unpackPhase = ''
+      runHook preUnpack
+
       mkdir source
-      7z x $src -osource
+      7z x -so "$src" | tar -xf - -C source
+
+      runHook postUnpack
     '';
 
     installPhase = ''
       runHook preInstall
-        
-      ls -R .
-      mkdir -p $out/opt/${pname} $out/bin
-      cp -r source/Balatro/game/* $out/opt/${pname}
+
+      mkdir -p "$out/opt/${pname}" "$out/bin"
+      cp -r source/Balatro/game/. "$out/opt/${pname}/"
+      test -f "$out/opt/${pname}/balatro.love"
 
       makeWrapper ${pkgs.love}/bin/love $out/bin/${pname} \
         --add-flags "$out/opt/${pname}/balatro.love" \

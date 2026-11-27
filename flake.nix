@@ -14,8 +14,14 @@
       ];
 
       perSystem =
-        { pkgs, ... }:
+        { pkgs, system, ... }:
         {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            config.allowUnfreePredicate = pkg:
+              pkg.name == "project_zomboid_42_20_2_92872.sh";
+          };
+
           packages = {
             balatro = pkgs.callPackage ./modules/balatro { };
             broforce = pkgs.callPackage ./modules/broforce { };
@@ -27,9 +33,9 @@
             gris = pkgs.callPackage ./modules/gris { };
             halo-ce = pkgs.callPackage ./modules/halo-ce { };
             libreaim = pkgs.callPackage ./modules/libreaim { };
-            melee = pkgs.callPackage ./modules/melee { };
             minecraft-launcher = pkgs.callPackage ./modules/minecraft-launcher { };
             project-zomboid = pkgs.callPackage ./modules/project-zomboid { };
+            slay-the-princess = pkgs.callPackage ./modules/slay-the-princess { };
             tmnt-shredders-revenge = pkgs.callPackage ./modules/tmnt-shredders-revenge { };
           };
         };

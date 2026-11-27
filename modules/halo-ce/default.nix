@@ -2,7 +2,6 @@
 let
   pname = "halo-ce";
   version = "v0.7.2e";
-  mapSrc = ./halo-xbox-maps.zip;
 
   deps = with pkgs; [
     sdl3
@@ -45,15 +44,19 @@ let
     installPhase = ''
       runHook preInstall
 
-      mkdir -p $out/opt/${pname} $out/bin $out/opt/${pname}/maps
-      cp -r * $out/opt/${pname}/
+      mkdir -p "$out/opt/${pname}" "$out/bin"
+      cp -r . "$out/opt/${pname}/"
+      chmod +x "$out/opt/${pname}/halo"
 
-      ls -R $out/opt/${pname}
-      unzip -o ${mapSrc} -d $out/opt/${pname}
-      chmod +x $out/opt/${pname}/halo
-
-      makeWrapper $out/opt/${pname}/halo $out/bin/${pname} \
-        --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath deps} 
+      makeWrapper "$out/opt/${pname}/halo" "$out/bin/${pname}" \
+        --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath deps} \
+        --run 'export HALO_DATA_ROOT="''${HALO_DATA_ROOT:-''${XDG_DATA_HOME:-$HOME/.local/share}/${pname}}"' \
+        --run 'if [ ! -f "$HALO_DATA_ROOT/maps/ui.map" ]; then
+          printf "Halo CE requires Xbox game data. Put maps/ui.map and the other maps in %s/maps or set HALO_DATA_ROOT.\n" "$HALO_DATA_ROOT" >&2
+          exit 1
+        fi
+        cd -- "$HALO_DATA_ROOT" || exit 1
+        export HALO_DATA_ROOT="$PWD"'
 
       runHook postInstall
     '';
