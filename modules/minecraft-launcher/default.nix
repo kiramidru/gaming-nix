@@ -3,7 +3,7 @@ let
   pname = "minecraft-launcher";
   version = "1.40.3";
 
-  deps = with pkgs; [
+  runtimeLibs = with pkgs; [
     glib
     gtk3
     cairo
@@ -12,6 +12,10 @@ let
     atk
 
     libGL
+    vulkan-loader
+    wayland
+    libxkbcommon
+    libdecor
     glfw
     openal
     udev
@@ -53,8 +57,6 @@ let
       makeWrapper
     ];
 
-    buildInputs = deps;
-
     dontUnpack = true;
 
     installPhase = ''
@@ -64,7 +66,7 @@ let
       install -Dm644 "$src" "$launcherJar"
 
       makeWrapper ${jre}/bin/java "$out/bin/${launcher}" \
-        --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath deps} \
+        --prefix LD_LIBRARY_PATH : ${pkgs.addDriverRunpath.driverLink}/lib:${pkgs.lib.makeLibraryPath runtimeLibs} \
         --set _JAVA_AWT_WM_NONREPARENTING 1 \
         --add-flags "-jar $launcherJar" \
         --add-flags "--java-executable ${jre}/bin/java"
