@@ -6,9 +6,6 @@ let
   deps = with pkgs; [
     stdenv.cc.cc.lib
     zlib
-    gdk-pixbuf
-    glib
-    gtk3
 
     libglvnd
     libX11
@@ -57,9 +54,11 @@ let
     unpackPhase = ''
       runHook preUnpack
 
-      # Extract the appended tar.xz payload without running the installer.
+      # Extract the game directly, omitting Unity's optional GTK 2 screen selector.
       mkdir source
-      tail -c 4653837888 "$src" | tar -xJf - -C source Cuphead/game
+      tail -c 4653837888 "$src" | tar -xJf - -C source \
+        --exclude='Cuphead/game/Cuphead_Data/Plugins/x86_64/ScreenSelector.so' \
+        Cuphead/game
 
       runHook postUnpack
     '';
