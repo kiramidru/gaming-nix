@@ -39,7 +39,7 @@ let
     ];
   };
 
-  legacy-launcher = pkgs.stdenv.mkDerivation {
+  minecraft-launcher = pkgs.stdenv.mkDerivation {
     inherit pname version;
 
     src = pkgs.fetchurl {
@@ -81,4 +81,4 @@ let
     };
   };
 in
-legacy-launcher
+minecraft-launcher
