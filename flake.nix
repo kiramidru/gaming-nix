@@ -21,6 +21,7 @@
             broforce = pkgs.callPackage ./modules/broforce { };
             celeste = pkgs.callPackage ./modules/celeste { };
             crawl = pkgs.callPackage ./modules/crawl { };
+            cuphead = pkgs.callPackage ./modules/cuphead { };
             devil-daggers = pkgs.callPackage ./modules/devil-daggers { };
             fury-unleashed = pkgs.callPackage ./modules/fury-unleashed { };
             gris = pkgs.callPackage ./modules/gris { };
