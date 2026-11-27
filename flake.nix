@@ -27,7 +27,6 @@
             halo-ce = pkgs.callPackage ./modules/halo-ce { };
             libreaim = pkgs.callPackage ./modules/libreaim { };
             melee = pkgs.callPackage ./modules/melee { };
-            minecraft-launcher = pkgs.callPackage ./modules/minecraft-launcher { };
             project-zomboid = pkgs.callPackage ./modules/project-zomboid { };
             tmnt-shredders-revenge = pkgs.callPackage ./modules/tmnt-shredders-revenge { };
           };
